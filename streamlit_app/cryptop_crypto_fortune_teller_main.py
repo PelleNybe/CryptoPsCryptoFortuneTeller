@@ -1453,8 +1453,12 @@ with tab9:
 
 # --- TAB 10: ALPHA INSIGHTS ---
 with tab10:
-    st.subheader("💎 Alpha Insights: Institutional-Grade Market Intelligence")
-    st.write("Leverage 5 world-class features to gain an edge in the crypto market. Track whales, farm DeFi yields, analyze sentiment, exploit arbitrage, and master tokenomics.")
+    st.markdown("""
+    <div style='padding: 20px; background: rgba(0, 255, 255, 0.05); border-left: 5px solid #00FFFF; border-radius: 5px; margin-bottom: 20px;'>
+        <h2 style='margin-top: 0; color: #00FFFF; font-family: "Cinzel", serif;'>💎 Alpha Insights: Institutional-Grade Market Intelligence</h2>
+        <p style='font-size: 1.1rem; color: #E0E0E0;'>Leverage 5 world-class features to gain an edge in the crypto market. Track whales, farm DeFi yields, analyze sentiment, exploit arbitrage, and master tokenomics.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     alpha1, alpha2, alpha3, alpha4, alpha5 = st.tabs([
         "🐋 Whale Tracker",
