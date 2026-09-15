@@ -88,12 +88,12 @@ st.set_page_config(
 apply_custom_css()
 
 # 3) Header
-logo_path = "assets/logo.png"
+logo_path = "streamlit_app/assets/logo.png"
 
 col1, col2, col3 = st.columns([1, 6, 1])
 with col2:
     try:
-        st.image(logo_path, width=150, alt="Crypto P's Fortune Teller Logo")
+        st.image(logo_path, width=150)
     except Exception as e:
         logging.error("Failed to load logo", exc_info=True)
         st.write("🔮") # Fallback if image missing
@@ -1238,7 +1238,7 @@ with tab9:
                         st.session_state.exchange_connected = True
                         st.session_state.connected_exchange_name = ex_name
                         st.toast(msg, icon="✅")
-                            st.success(msg)
+                        st.success(msg)
                     else:
                         st.error(msg)
 
@@ -1412,8 +1412,9 @@ with tab9:
             with col_c1:
                 if st.button("▶️ Start Bot"):
                     res, msg = client.start_bot()
-                    if res: st.toast(msg, icon="✅")
-                            st.success(msg)
+                    if res:
+                        st.toast(msg, icon="✅")
+                        st.success(msg)
                     else: st.error(msg)
             with col_c2:
                 if st.button("⏹️ Stop Bot"):
@@ -1453,8 +1454,12 @@ with tab9:
 
 # --- TAB 10: ALPHA INSIGHTS ---
 with tab10:
-    st.subheader("💎 Alpha Insights: Institutional-Grade Market Intelligence")
-    st.write("Leverage 5 world-class features to gain an edge in the crypto market. Track whales, farm DeFi yields, analyze sentiment, exploit arbitrage, and master tokenomics.")
+    st.markdown("""
+    <div style='padding: 20px; background: rgba(0, 255, 255, 0.05); border-left: 5px solid #00FFFF; border-radius: 5px; margin-bottom: 20px;'>
+        <h2 style='margin-top: 0; color: #00FFFF; font-family: "Cinzel", serif;'>💎 Alpha Insights: Institutional-Grade Market Intelligence</h2>
+        <p style='font-size: 1.1rem; color: #E0E0E0;'>Leverage 5 world-class features to gain an edge in the crypto market. Track whales, farm DeFi yields, analyze sentiment, exploit arbitrage, and master tokenomics.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     alpha1, alpha2, alpha3, alpha4, alpha5 = st.tabs([
         "🐋 Whale Tracker",

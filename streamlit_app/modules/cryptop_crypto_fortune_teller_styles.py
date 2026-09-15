@@ -314,5 +314,51 @@ def apply_custom_css():
             100% { filter: hue-rotate(360deg); }
         }
 
-    </style>
+
+        /* Visual Improvement 6: Enhanced Tables */
+        [data-testid="stDataFrame"] tbody tr:hover {
+            background-color: rgba(255, 0, 255, 0.1) !important;
+            transition: background-color 0.2s ease;
+        }
+
+        [data-testid="stDataFrame"] td {
+            color: #d1c4e9 !important;
+        }
+
+        /* General nice glow on the whole app */
+        .stApp::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            box-shadow: inset 0 0 100px rgba(153, 0, 255, 0.1);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+
+    /* Visual Improvement 8: Enhanced Global Glow */
+    .stApp {
+        background: radial-gradient(circle at center, #1b092b 0%, #0d0014 60%, #000000 100%) !important;
+    }
+
+    .stMarkdown h1 {
+        background: -webkit-linear-gradient(45deg, #FF00FF, #00FFFF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 20px rgba(255,0,255,0.4);
+    }
+
+    [data-testid="stSidebar"] {
+        border-right: 1px solid rgba(0, 255, 255, 0.2) !important;
+        background: rgba(10, 0, 20, 0.85) !important;
+    }
+
+    /* Interactive metric glow on hover */
+    [data-testid="stMetricValue"]:hover {
+        transform: scale(1.05);
+        transition: transform 0.2s ease;
+        text-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+    }
+
+</style>
 """, unsafe_allow_html=True)
