@@ -116,7 +116,7 @@ def _fetch_historical_prices_cached(coin_id, vs_currency='usd', days='max'):
         df = pd.DataFrame(prices, columns=['timestamp', 'close'])
         # convert ms timestamp to datetime
         df['date'] = pd.to_datetime(df['timestamp'], unit='ms')
-        df.set_index('date', inplace=True)
+        df = df.set_index('date')
         df = df[['close']]
         return df
     except Exception as e:
@@ -189,7 +189,7 @@ def _fetch_historical_ohlc_cached(coin_id, vs_currency='usd', days='max'):
         ohlc_data = cg_retry_call(cg.get_coin_ohlc_by_id, id=coin_id, vs_currency=vs_currency, days=days)
         df = pd.DataFrame(ohlc_data, columns=['timestamp','open','high','low','close'])
         df['date'] = pd.to_datetime(df['timestamp'], unit='ms')
-        df.set_index('date', inplace=True)
+        df = df.set_index('date')
         df = df[['open','high','low','close']]
         return df
     except Exception as e:
@@ -1213,7 +1213,7 @@ def calculate_dca_strategy(coin_id, amount, freq_days, duration_days):
         'price': prices
     })
 
-    res_df.set_index('date', inplace=True)
+    res_df = res_df.set_index('date')
 
     current_price = df.iloc[-1]['close']
 
@@ -1247,7 +1247,7 @@ def get_historical_volume(coin_id, days=30):
         volumes = data.get('total_volumes', [])
         df = pd.DataFrame(volumes, columns=['timestamp', 'volume'])
         df['date'] = pd.to_datetime(df['timestamp'], unit='ms')
-        df.set_index('date', inplace=True)
+        df = df.set_index('date')
         return df[['volume']]
     except Exception:
         logging.error("Failed to get total volume", exc_info=True)
