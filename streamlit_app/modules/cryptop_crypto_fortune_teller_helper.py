@@ -798,6 +798,7 @@ def calculate_stochastic_oscillator(df, k_window=14, d_window=3):
 
     return pd.DataFrame({'%K': k, '%D': d}, index=df.index)
 
+import logging
 @st.cache_data
 def calculate_ichimoku_cloud(df):
     """
