@@ -1,0 +1,102 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792920606.029649  389969 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1792920606.628695  389969 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792920610.708889  389969 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.7.0
+rootdir: /app
+plugins: cov-7.1.0, anyio-4.15.1
+collected 112 items
+
+tests/test_api_config.py .                                               [  0%]
+tests/test_backtest.py ..                                                [  2%]
+tests/test_batch_prices.py ...                                           [  5%]
+tests/test_config_security.py .                                          [  6%]
+tests/test_dos_prevention.py ...                                         [  8%]
+tests/test_ensemble.py ...                                               [ 11%]
+tests/test_exchange_manager.py ......................                    [ 31%]
+tests/test_fng_security.py ...                                           [ 33%]
+tests/test_freqtrade_manager.py .....................                    [ 52%]
+tests/test_helper.py ...........                                         [ 62%]
+tests/test_model_validation.py ...                                       [ 65%]
+tests/test_models.py .............                                       [ 76%]
+tests/test_new_features.py ......                                        [ 82%]
+tests/test_new_models.py ...                                             [ 84%]
+tests/test_requests_security.py .                                        [ 85%]
+tests/test_security_checks.py .                                          [ 86%]
+tests/test_security_fix_verification.py ..                               [ 88%]
+tests/test_security_fixes.py .                                           [ 89%]
+tests/test_signals.py ...                                                [ 91%]
+tests/test_url_validation.py ....                                        [ 95%]
+tests/test_xss_scanner.py ..                                             [ 97%]
+benchmarks/test_arima_dos.py .                                           [ 98%]
+benchmarks/test_lstm_dos.py .                                            [ 99%]
+benchmarks/test_prophet_dos.py .                                         [100%]
+
+=============================== warnings summary ===============================
+tests/test_models.py::test_arima_exceptions
+tests/test_models.py::test_arima_exceptions
+tests/test_models.py::test_get_best_arima
+  /home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-invertible starting MA parameters found. Using zeros as starting parameters.
+    start_params = self.start_params
+
+tests/test_models.py: 13 warnings
+  /home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/statsmodels/tsa/statespace/sarimax.py:989: EstimationWarning: Too few observations to estimate starting parameters for ARMA and trend. All parameters except for variances will be set to zeros.
+    params_variance) = self._conditional_sum_squares(
+
+tests/test_models.py: 12 warnings
+  /home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:679: EstimationWarning: Non-stationary starting autoregressive parameters found. Using zeros as starting parameters.
+    start_params = self.start_params
+
+tests/test_models.py::test_arima_exceptions
+  /home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/statsmodels/tsa/statespace/sarimax.py:1022: EstimationWarning: Too few observations to estimate starting parameters for seasonal ARMA. All parameters except for variances will be set to zeros.
+    self._conditional_sum_squares(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 112 passed, 29 warnings in 164.63s (0:02:44) =================
+
+============================================================
+ CRYPTO P'S CRYPTO FORTUNE TELLER - SYSTEM HEALTH CHECK
+============================================================
+
+============================================================
+ Python Version Check
+============================================================
+Python executable: /home/jules/.pyenv/versions/3.12.13/bin/python3
+Python version: 3.12.13 (main, Mar  6 2026, 16:37:31) [GCC 13.3.0]
+✅ Python version OK
+
+============================================================
+ Dependency Check
+============================================================
+✅ streamlit found
+✅ pandas found
+✅ numpy found
+✅ plotly found
+✅ pycoingecko found
+✅ prophet found
+✅ tensorflow found
+✅ sklearn found
+✅ requests found
+✅ statsmodels found
+✅ ccxt found
+ℹ️  numpy version: 1.26.4
+
+============================================================
+ Connectivity Check
+============================================================
+✅ CoinGecko API reachable (Latency: 131ms)
+
+============================================================
+ Running Test Suite
+============================================================
+Executing pytest... (this may take a minute)
+
+✅ All tests passed successfully!
+
+============================================================
+ Health Check Summary
+============================================================
+🎉 SYSTEM HEALTH: 100% - Ready to Launch

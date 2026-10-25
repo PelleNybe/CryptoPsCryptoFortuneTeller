@@ -123,3 +123,80 @@ def test_get_coin_market_data(mock_cg, mock_st_error):
     result_err = get_coin_market_data('bitcoin')
     assert result_err == {}
     mock_st_error.assert_called()
+
+def test_calculate_ichimoku_cloud():
+    from streamlit_app.modules.cryptop_crypto_fortune_teller_helper import calculate_ichimoku_cloud
+    import pandas as pd
+    import numpy as np
+    data = {
+        'high': np.linspace(100, 150, 100),
+        'low': np.linspace(90, 140, 100),
+        'close': np.linspace(95, 145, 100)
+    }
+    df = pd.DataFrame(data)
+    ich = calculate_ichimoku_cloud(df)
+
+    assert 'SpanA' in ich.columns
+    assert 'SpanB' in ich.columns
+    assert 'Chikou' in ich.columns
+
+def test_calculate_parabolic_sar():
+    from streamlit_app.modules.cryptop_crypto_fortune_teller_helper import calculate_parabolic_sar
+    import pandas as pd
+    import numpy as np
+    data = {
+        'high': np.linspace(100, 150, 10),
+        'low': np.linspace(90, 140, 10),
+        'close': np.linspace(95, 145, 10)
+    }
+    df = pd.DataFrame(data)
+    sar = calculate_parabolic_sar(df)
+    assert isinstance(sar, pd.Series) or 'SAR' in sar.columns
+
+def test_get_defi_yields():
+    from streamlit_app.modules.cryptop_crypto_fortune_teller_helper import get_defi_yields
+    from unittest.mock import patch, MagicMock
+    with patch('streamlit_app.modules.cryptop_crypto_fortune_teller_helper.requests.get') as mock_get:
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            'data': [
+                {'symbol': 'USDC', 'project': 'Aave', 'chain': 'Ethereum', 'apy': 5.5, 'tvlUsd': 1000000, 'ilRisk': 'no'}
+            ]
+        }
+        mock_get.return_value = mock_response
+
+        yields = get_defi_yields()
+
+        assert yields is not None
+        assert not yields.empty
+        assert yields.iloc[0]['symbol'] == 'USDC'
+
+        # Exception
+        get_defi_yields.clear()
+        mock_get.side_effect = Exception("API fail")
+        y2 = get_defi_yields()
+        assert y2.empty
+
+def test_get_exchange_arbitrage():
+    from streamlit_app.modules.cryptop_crypto_fortune_teller_helper import get_exchange_arbitrage
+    from unittest.mock import patch, MagicMock
+    with patch('streamlit_app.modules.cryptop_crypto_fortune_teller_helper.ccxt') as mock_ccxt:
+        mock_ex1 = MagicMock()
+        mock_ex1.fetch_ticker.return_value = {'last': 50000}
+
+        mock_ex2 = MagicMock()
+        mock_ex2.fetch_ticker.return_value = {'last': 50500}
+
+        mock_ccxt.binance.return_value = mock_ex1
+        mock_ccxt.kraken.return_value = mock_ex2
+
+        df = get_exchange_arbitrage('BTC/USDT')
+        assert df is not None
+        assert not df.empty
+        assert 'Price' in df.columns
+
+        # One fails
+        mock_ex2.fetch_ticker.side_effect = Exception("Fetch Fail")
+        df2 = get_exchange_arbitrage('ETH/USDT')
+        assert df2 is not None

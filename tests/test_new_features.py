@@ -117,6 +117,7 @@ def test_calculate_dca_strategy(mock_hist):
     # Price stays flat at $100
     dates = pd.date_range(start='2023-01-01', periods=10, freq='D')
     df = pd.DataFrame({'close': [100]*10}, index=dates)
+    df['date'] = dates
     mock_hist.return_value = df
 
     # Invest $100 every day for 10 days
