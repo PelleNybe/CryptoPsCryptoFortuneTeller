@@ -1,6 +1,6 @@
 streamlit>=1.66.0
 pandas>=3.0.6
-numpy>=1.25.0,<2.0.0
+numpy>=2.5.4,<3.0.0
 plotly>=7.1.0
 pycoingecko>=2.1.0
 prophet>=1.5.0
